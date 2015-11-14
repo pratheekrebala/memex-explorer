@@ -1,0 +1,28 @@
+From 03bcca549327ba6188760840b04a2566adc620f4 Mon Sep 17 00:00:00 2001
+From: Pratheek Rebala <pratheekrebala@gmail.com>
+Date: Fri, 13 Nov 2015 20:46:31 -0500
+Subject: [PATCH 2/2] Patches to IndexWriter
+
+Signed-off-by: Pratheek Rebala <pratheekrebala@gmail.com>
+---
+ .../java/org/apache/nutch/indexwriter/elastic/ElasticIndexWriter.java | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/plugin/indexer-elastic/src/java/org/apache/nutch/indexwriter/elastic/ElasticIndexWriter.java b/src/plugin/indexer-elastic/src/java/org/apache/nutch/indexwriter/elastic/ElasticIndexWriter.java
+index c1827e7..8fec047 100644
+--- a/src/plugin/indexer-elastic/src/java/org/apache/nutch/indexwriter/elastic/ElasticIndexWriter.java
++++ b/src/plugin/indexer-elastic/src/java/org/apache/nutch/indexwriter/elastic/ElasticIndexWriter.java
+@@ -123,7 +123,9 @@ public class ElasticIndexWriter implements IndexWriter {
+ 
+   @Override
+   public void write(NutchDocument doc) throws IOException {
+-    String id = (String) doc.getFieldValue("id");
++    String url = (String) doc.getFieldValue("id");
++    String digest = (String) doc.getFieldValue("digest");
++    String id = url + ":" + digest;
+     String type = doc.getDocumentMeta().get("type");
+     if (type == null)
+       type = "doc";
+-- 
+2.6.2
+
