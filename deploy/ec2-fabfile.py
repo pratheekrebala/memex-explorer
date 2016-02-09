@@ -181,7 +181,7 @@ def install_miniconda():
 
 def install_repo(public_dns_name, ip_address):
     sudo('rm -rf ~/memex-explorer')
-    url = 'https://github.com/memex-explorer/memex-explorer/'
+    url = 'https://github.com/pratheekrebala/memex-explorer/'
     if os.environ.get('GIT_BRANCH'):
         run("git clone {} --branch {}".format(url, os.environ.get('GIT_BRANCH')))
     else:
