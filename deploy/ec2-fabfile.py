@@ -33,7 +33,7 @@ HTPASSWD_FILENAME = '/vagrant/deploy/dot-htpasswd'
 
 def check_env_vars():
     missing = []
-    for varname in ['AWS_ID', 'AWS_SECRET', 'HTPASSWD_PATH',]:
+    for varname in ['AWS_ID', 'AWS_SECRET',]:
        if os.environ.get(varname, 'XXX').lower() == 'xxx':
            missing.append(varname)
     if missing:
@@ -194,7 +194,7 @@ def install_repo(public_dns_name, ip_address):
     run("echo 'HOSTNAME = \"{}\"' >> {}".format(public_dns_name, SETTINGS_FILENAME))
     run("echo 'ROOT_PORT = \"{}\"' >> {}".format(MEMEX_APP_PORT, SETTINGS_FILENAME))
     run("echo 'IP_ADDR = \"{}\"' >> {}".format(ip_address, SETTINGS_FILENAME))
-    put(os.environ.get('HTPASSWD_PATH'), HTPASSWD_FILENAME)
+    #put(os.environ.get('HTPASSWD_PATH'), HTPASSWD_FILENAME)
 
 def run_salt():
     sudo('mkdir -p /etc/salt')
@@ -214,7 +214,7 @@ if os.environ.get('MEMEX_IP_ADDR'):
 else:
     key_filename = create_keypair()
     instance = create_box()
-    subprocess.check_output(['cp', key_filename, 
+    subprocess.check_output(['cp', key_filename,
                              os.path.join(os.path.dirname(key_filename), 'ec2-{}.pem'.format(instance.ip_address))])
     public_dns_name = instance.public_dns_name
     ip_address = instance.ip_address
