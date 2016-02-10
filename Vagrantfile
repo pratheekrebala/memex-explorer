@@ -6,7 +6,7 @@ $script = <<SCRIPT
 sudo apt-get update
 sudo apt-get install -y make gcc g++ openjdk-7-jre-headless nodejs nodejs-legacy
 wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
-bash ./Miniconda-latest-Linux-x86_64.sh -b
+bash ./Miniconda-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 export PATH=/home/vagrant/miniconda/bin:$PATH
 cd /vagrant/source
 bash app_setup.sh
@@ -102,4 +102,3 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", privileged: false, inline: $script
 end
-
