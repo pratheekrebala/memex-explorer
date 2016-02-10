@@ -238,7 +238,7 @@ try:
     create_vagrant()
     install_miniconda()
     install_repo(public_dns_name, ip_address)
-    run_salt()
+    #run_salt()
 except Exception:
     print(ssh_command)
     print(mosh_command)
